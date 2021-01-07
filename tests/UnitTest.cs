@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using PasswordGenerator;
 
@@ -20,10 +21,14 @@ namespace PasswordGeneratorTests
         }
 
         [Test]
-        public void GenerateRandomNumberForEachSequence()
+        public void GenerateRandomNumberForEachSequence_ReturnsExpectedSumAndLength()
         {
-            int[] numberSequence = Program.GenerateRandomNumberForEachSequence(15, Program.Sequence.Length);
-            Assert.IsInstanceOf<int[]>(numberSequence);
+            const int total = 15;
+
+            int[] numberSequence = Program.GenerateRandomNumberForEachSequence(total, Program.Sequence);
+
+            Assert.That(numberSequence.Sum(), Is.EqualTo(total));
+            Assert.That(numberSequence.Length, Is.EqualTo(Program.Sequence));
         }
     }
 }
